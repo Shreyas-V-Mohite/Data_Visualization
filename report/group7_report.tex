@@ -1,0 +1,581 @@
+%
+% IEEE Transactions on Microwave Theory and Techniques example
+% Tibault Reveyrand - http://www.microwave.fr
+%
+% http://www.microwave.fr/LaTeX.html
+% ---------------------------------------
+
+
+
+% ================================================
+% Please HIGHLIGHT the new inputs such like this :
+% Text :
+%  \hl{comment}
+% Aligned Eq. 
+% \begin{shaded}
+% \end{shaded}
+% ================================================
+
+
+
+\documentclass[11pt,journal]{IEEEtran}
+
+
+%\usepackage[retainorgcmds]{IEEEtrantools}
+%\usepackage{bibentry}  
+\usepackage{xcolor,soul,framed} %,caption
+
+\colorlet{shadecolor}{yellow}
+% \usepackage{color,soul}
+\usepackage[pdftex]{graphicx}
+\graphicspath{{../pdf/}{../jpeg/}}
+\DeclareGraphicsExtensions{.pdf,.jpeg,.png}
+
+\usepackage[cmex12]{amsmath}
+%Mathabx do not work on ScribTex => Removed
+%\usepackage{mathabx}
+\usepackage{array}
+\usepackage{mdwmath}
+\usepackage{mdwtab}
+\usepackage{eqparbox}
+\usepackage{url}
+
+\hyphenation{op-tical net-works semi-conduc-tor}
+
+%\bstctlcite{IEEE:BSTcontrol}
+
+
+%=== TITLE & AUTHORS ====================================================================
+\begin{document}
+\title{Patient Experience Analysis}
+\author{
+    Nitya~Rondla,~\IEEEmembership{nitya.rondla@sjsu.edu}
+    Rutuja~Kadam,~\IEEEmembership{rutujanitin.kadam@sjsu.edu}\\
+    Sai~Swetha~Madapati,~\IEEEmembership{saiswetha.madapati@sjsu.edu}
+    Shreyas~Mohite,~\IEEEmembership{shreyasvinayak.mohite@sjsu.edu} \\
+    and~Shubham~Naik,~\IEEEmembership{shubhamanisha.naik@sjsu.edu
+}% <-this % stops a space
+    
+}
+
+% The paper headers
+\markboth{IEEE TRANSACTIONS ON HEALTH DATA ANALYTICS, VOL.~X, NO.~X, DECEMBER~2024}
+{Rondla \MakeLowercase{\textit{et al.}}: Patient Experience Analysis}
+
+% ====================================================================
+\maketitle
+
+
+
+% === ABSTRACT ====================================================================
+% =================================================================================
+\begin{abstract}
+%\boldmath
+Abstract - Patient satisfaction is a critical measure of the quality of health care provided in that it directly affects patient outcomes, reputation, and long-term patient loyalty. Determining the drivers of satisfaction and dissatisfaction is important for establishing trust and further enhancing the quality of care. The project focuses on the analysis of data from the Consumer Assessment of Healthcare Providers and Systems (CAHPS) survey for key drivers of patient satisfaction. Critical areas such as communication, wait times, and provider responsiveness were identified to be major determinants of the patient experience.
+
+Advanced sentiment analysis was performed on the textual feedback provided by the patients, which gave more in-depth insights into their experiences. This allowed for a comprehensive understanding of patient concerns, not limited to numerical ratings but also the emotions and themes reflected in their feedback. The categorization and analysis of this data highlighted the recurring issues faced by patients, such as accessibility and interaction with the staff, that can be worked upon to enhance the satisfaction level of the patients.
+
+To make the insights actionable, interactive dashboards showing the trends in patient satisfaction were developed that benchmark healthcare providers against their peers. These dashboards enable performance comparisons efficiently and help stakeholders identify areas of high performance and those that need improvement. This benchmarking infuses transparency and accountability, which encourages healthcare providers to maintain a high level of care.
+
+This comprehensive analysis helps healthcare providers with actionable insights to enhance their services and promotes a patient-centered approach to care delivery. It also, at the same time, provides transparent data available to patients for informed choices of healthcare providers. Establishing a framework for continuous quality improvement, this project closes the gap between the expectations of patients and the delivered services, thus improving effectiveness and responsiveness in healthcare delivery.
+
+
+\end{abstract}
+
+
+% === KEYWORDS ====================================================================
+% =================================================================================
+\begin{IEEEkeywords}
+\hl{CAHPS Survey Analysis, Continuous Quality Enhancement, Patient Satisfaction, Provider Benchmarking, Sentiment Analysis.}
+\end{IEEEkeywords}
+
+
+
+
+
+
+% For peer review papers, you can put extra information on the cover
+% page as needed:
+% \ifCLASSOPTIONpeerreview
+% \begin{center} \bfseries EDICS Category: 3-BBND \end{center}
+% \fi
+%
+% For peerreview papers, this IEEEtran command inserts a page break and
+% creates the second title. It will be ignored for other modes.
+\IEEEpeerreviewmaketitle
+
+
+% ====================================================================
+% ====================================================================
+% ====================================================================
+
+
+
+
+
+
+
+
+
+
+
+% === I. INTRODUCTION =============================================================
+% =================================================================================
+\section{Introduction}
+
+\IEEEPARstart Patient satisfaction is one of the key factors of quality healthcare. It directly impacts individual health outcomes, influences the reputation of healthcare providers, and ultimately determines their long-term success. Understanding the factors that contribute to patient satisfaction or dissatisfaction is crucial for building trust, improving care delivery, and ensuring patient loyalty.
+
+This project examines patient experiences using data from the Consumer Assessment of Healthcare Providers and Systems (CAHPS) survey. By identifying the drivers of satisfaction and dissatisfaction, advanced analytic techniques are employed to transform survey data into actionable insights for healthcare providers. These insights help focus efforts on targeted areas of improvement, addressing critical aspects of care delivery.
+
+In addition to identifying satisfaction drivers, the project emphasizes benchmarking healthcare providers to foster accountability and transparency. By presenting data in a clear and actionable format, the study equips patients with the tools needed to make informed decisions about their healthcare options.
+
+The outcomes of this analysis include improved communication, reduced wait times, and enhanced provider responsiveness—factors that are pivotal for improving patient experiences. Furthermore, the project integrates sentiment analysis and interactive dashboards to enable continuous feedback and adaptation. This dynamic approach aligns healthcare services with evolving patient needs and closes the gap between patient expectations and delivered care, creating a truly patient-centered healthcare system.
+
+
+
+% === II. Harmonically-Terminated Power Rectifier Analysis ========================
+% =================================================================================
+\section{Problem Statement}
+\IEEEPARstart In the modern healthcare context, patient satisfaction is an important measure for assessing the quality of care given at healthcare facilities. It also directly affects patient outcomes, trust, and loyalty, not to mention the reputation of healthcare providers. In most cases, however, healthcare organizations find it difficult to identify those factors driving patient satisfaction and to act upon areas of dissatisfaction.
+
+Thus, the inability to provide actionable insight from patient feedback restricts further improvements that a provider would intend or like to make. Most of today's systems for analyzing patients' experiences depend on nonspecific, one-size-fits-all approaches that cannot understand how patient needs vary across a diverse range of demographics, service types, and settings of care. Moreover, the absence of effective benchmarking tools makes comparisons of provider performance difficult and, in their turn, accountability.
+
+This project fills these gaps by tapping into the data from CAHPS surveys to identify the key drivers of patient satisfaction and dissatisfaction. Using advanced analytics, including sentiment analysis and interactive visualizations, this project will present healthcare providers with an understanding of patient experiences and actionable recommendations for improvement. It will encourage accountability, improve service quality, and empower patients with transparent information to make informed choices.
+
+\section{Scope}
+\IEEEPARstart This project is about understanding what patients think about their healthcare experiences and using that feedback to make things better. By analyzing data from the CAHPS (Consumer Assessment of Healthcare Providers and Systems) survey, we want to identify what’s working well, uncover areas where improvements are needed, and provide practical solutions that benefit both patients and providers. Here’s what we’re aiming to achieve:
+
+1. Comparing Healthcare Providers
+We’ll look at how different healthcare providers perform based on patient feedback. This will help us highlight top-performing providers while identifying areas where others need to step up.
+
+2. Providing Clear, Actionable Recommendations: 
+Using insights from the data, we’ll create practical suggestions for healthcare providers to improve patient care. Whether it’s better communication, shorter wait times, or more respectful interactions, these recommendations will focus on changes that truly matter to patients.
+
+3. Helping Patients Make Informed Decisions:
+Patients often struggle to choose the right healthcare provider. By showcasing the best performers, this project will empower patients to make confident, informed choices about their care.
+
+4. Creating Patient-Centered Care: 
+At the heart of this project is the goal of helping providers create a healthcare environment where patients feel respected, heard, and cared for. This means focusing on the human side of healthcare, like empathy, clear communication, and building trust.
+
+\section{LITERATURE SURVEY}
+
+\textit{Patient satisfaction has historically been acknowledged as an essential element of the quality of healthcare. A variety of studies have investigated the correlation between patient experiences and healthcare outcomes, underscoring the necessity of obtaining and evaluating feedback for ongoing enhancement.}
+
+\textit{The CAHPS (Consumer Assessment of Healthcare Providers and Systems) survey is extensively employed to assess patient satisfaction and the quality of healthcare services. Research conducted by Quigley et al. (2024) and Dyer et al. (2012) has investigated the dependability and validity of the data obtained from the CAHPS survey in pinpointing essential performance domains for healthcare practitioners. These investigations highlight the significance of indicators like communication, waiting periods, and provider responsiveness in influencing patient perceptions.}
+
+\textit{Sentiment analysis has arisen as an important instrument for comprehending detailed feedback within patient remarks. Studies indicate that Natural Language Processing (NLP) methodologies are capable of deriving insights from unstructured textual information, disclosing consistent themes and sentiments that might remain obscure when relying solely on numerical ratings. For example, De Leon et al. (2012) emphasized the capability of sentiment analysis to pinpoint particular issues within patient experiences, including challenges related to accessibility and interactions with staff.}
+
+\textit{While much progress has been made, most methodologies fail to address demographic-specific variations in patient satisfaction and fail to comprehensively benchmark provider performance. Existing systems also lack the integration of real-time feedback, hindering their ability to adapt to evolving patient needs.}
+
+\textit{This initiative expands on prior investigations by integrating CAHPS survey data with sophisticated sentiment analysis and visualization methodologies to rectify these deficiencies. It presents demographic segmentation and benchmarking instruments to offer a more comprehensive and implementable insight into patient satisfaction. The utilization of interactive dashboards, promotes real-time comparisons of provider performance, encouraging enhanced accountability and supporting ongoing quality enhancement in healthcare services.}
+
+
+\section{METHODOLOGY}
+
+\IEEEPARstart The methodological framework of the project is systematic and structured, using CAHPS survey data in conjunction with the most advanced analytical methods to develop practical and actionable insights into patient satisfaction. Since each step in this process was carefully designed to comprehensively address patient experiences, these steps are described in detail below.
+
+\textbf{Data Collection}\\
+This project leverages openly available CAHPS survey data, which represents an in-depth look into what patients have to say about their personal health care experiences. It contains metrics on effective communication, how responsive providers were, how long waits were, and other overall satisfaction measures. With that in mind, using this data should help us determine what are the most influential factors for both satisfaction and dissatisfaction in healthcare so that improvements could be carried out at focused points.
+
+\vspace{1em}
+
+\textbf{Data Preprocessing}\\
+Preprocessing of the data involved an arduous process that was required for maintaining data quality and ensuring that it would agree with various analysis tools. Missing values and inconsistencies had to be cleaned using approximate values deduced from statistical methods of interpolation. The integrity of the data was preserved with appropriate data types standardizing for the data to meet the expectations of analytical and visualization tools. This was an important initial step to ensure the validity and preparedness of data for subsequent analysis.
+
+\vspace{1em}
+
+\textbf{Exploratory Data Analysis}\\
+EDA was done focusing on critical variables: the demographic profile of the patients, satisfaction levels, and the characteristics of the providers in order to find out whether there is a trend and pattern. Satisfaction was visualized over different demographic groups, including age and gender, or types of healthcare services, which include emergency care and specialized care. Outliers were shown, which indicated unique or exemplary instances within the patient data. These analyses gave insight into the basics of the dataset and thus helped narrow down focus to aspects of most significance to the level of satisfaction of patients.
+
+\vspace{2em}
+
+
+\textbf{Visualization and Benchmarking}\\
+Interactive dashboards were developed to present the findings in a more accessible and actionable way using Power BI. Dynamic patient satisfaction trends are displayed on these dashboards, which also allow the benchmarking of healthcare providers against key satisfaction metrics. Benchmarking tools were used in order to assess provider performance where stakeholders can easily identify areas of excellence and those requiring improvement. The step enhances transparency and fosters accountability within the healthcare system.
+
+\vspace{1em}
+
+\textbf{Actionable Insights}\\
+Insights gained from analysis were synthesized into areas of high and low performance of care for patients. Some specific recommendations to address the systemic issues in enhancing the quality of service have been focused on identifying the opportunities for improvement. Harnessing these actionable insights, there is the possibility for healthcare providers to implement targeted interventions toward elevating the overall experience for patients.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\linewidth]{photo/1.png} % Ensure the image is in the correct folder or provide the correct path
+    \caption{Flow chart for the project}
+    \label{fig:flow_chart}
+\end{figure}
+
+
+\vspace{1em}
+
+This analytical framework provides a wide and thorough analysis of the experiences of patients. It will not only enable healthcare providers to improve their services but also enhance accountability through efficient benchmarking and evidence-based recommendations. By systematically addressing the factors driving patient satisfaction, this approach lays the foundation for continuous quality improvement in healthcare delivery.
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Findings}\\
+
+\noindent\textbf{Communication and Provider Responsiveness}
+
+\noindent Effective and timely communication is central to patient satisfaction. Patients value feeling heard, respected, and informed throughout their care. Providers should focus on empathetic listening and addressing concerns clearly and compassionately. Leveraging technology, such as patient portals and automated updates, ensures consistent communication and helps patients feel engaged and supported.\\
+
+\noindent\textbf{Wait Times Significantly Impact Patient Experiences}
+
+\noindent Excessive wait times are a major source of patient dissatisfaction and can detract from the quality of care. To address this, healthcare facilities should:
+\begin{itemize}
+    \item Prioritize efficient scheduling systems.
+    \item Provide real-time updates about delays.
+    \item Ensure adequate staffing during high-demand periods.
+\end{itemize}
+Enhancing the waiting experience with comfort-focused amenities or distractions can alleviate frustration and improve perceptions of care.\\
+
+\noindent\textbf{Demographics Such as Age and Gender Influence Satisfaction Levels}
+
+\noindent Patient satisfaction is not one-size-fits-all; age, gender, and cultural backgrounds greatly influence expectations. For example:\\
+\begin{itemize}
+    \item Older patients may appreciate detailed explanations and continuity in care.
+    \item Younger, tech-savvy individuals often prefer speed and digital interactions.
+\end{itemize}
+Tailoring services to accommodate these demographic differences fosters trust, improves outcomes, and ensures equity in care delivery.\\
+
+\noindent\textbf{Specialty Care and Emergency Services Exhibit Varying Satisfaction Trends}
+
+Satisfaction priorities differ between specialty and emergency care:
+\begin{itemize}
+    \item \textbf{Specialty Care}: Patients seek a relationship-driven approach with personalized attention and consistent follow-ups, creating a sense of partnership in their healthcare journey.
+    \item \textbf{Emergency Care}: Patients prioritize rapid, clear, and effective communication, as well as reassurance and comfort during stressful and urgent situations.\\
+\end{itemize}
+
+\noindent\textbf{Consistent Trends in Dissatisfaction Across Facilities Highlight Systemic Issues}\\
+
+When dissatisfaction trends appear across multiple locations, they highlight systemic inefficiencies or resource gaps. Addressing these issues requires cross-facility collaboration to:
+\begin{itemize}
+    \item Share best practices.
+    \item Identify underlying problems.
+    \item Implement uniform quality standards.
+\end{itemize}
+Proactive measures, such as standardizing procedures and ensuring sufficient resources, can address these challenges and promote sustainable improvements across the healthcare system.
+
+\section{Overview of Healthcare Facilities and Geographic Distribution}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\linewidth]{photo/2.jpeg} % Ensure the image is in the correct folder or provide the full path
+    \caption{Geographic Distribution and Facility Types in the Dataset}
+    \label{fig:facility_distribution}
+\end{figure}
+
+The majority of hospitals in the dataset are Acute Care Hospitals, which make up nearly 59\% of all facilities. These hospitals play a vital role in providing general and emergency care for large populations. 
+
+Critical Access Hospitals follow, comprising about 25\%, likely reflecting facilities in rural or underserved areas designed for smaller communities. Specialized hospital types, like Psychiatric and Children’s Hospitals, together form around 11\%, showing the importance of niche services but also their smaller footprint in the overall healthcare system. A very small percentage (1.69\%) of hospitals are categorized as "Not Available," which could indicate gaps in data or classification.
+
+\subsection{Geographic Distribution}
+The map clearly shows that the majority of hospitals are concentrated in North America, particularly in the United States. The eastern United States stands out with a particularly high density of healthcare facilities, likely reflecting population concentrations and urban development. Sparse distribution in areas like the Pacific and remote regions highlights potential challenges in healthcare accessibility for those living in less populated areas.
+
+\subsection{Facility Count and Overall Ratings}
+The dashboard includes 5,398 facilities, providing a robust dataset for analysis. The cumulative hospital rating of 17,000 suggests either a total quality score or aggregated patient satisfaction, which could be used to identify trends in performance or areas for improvement.
+
+\subsection{Insights}
+\begin{itemize}
+    \item \textbf{Acute and Critical Access Hospitals dominate}: These facilities highlight a focus on general and emergency care, essential for meeting widespread healthcare needs. However, this may indicate room to grow in specialized services like psychiatric and pediatric care.
+    \item \textbf{Regional Concentration}: The dense concentration of hospitals in certain regions, like the eastern U.S., contrasts with sparser areas, potentially indicating gaps in healthcare coverage or resource allocation.
+    \item \textbf{Comprehensive Dataset}: The dataset offers opportunities to drill deeper into specific facility types, geographic regions, or performance metrics for a more granular analysis.
+\end{itemize}
+
+
+\section{Patient Satisfaction Analysis}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\linewidth]{photo/3.jpeg} % Ensure the image is in the correct folder or provide the full path
+    \caption{Overall Satisfaction Percentage and Key Metrics Analysis}
+    \label{fig:satisfaction_analysis}
+\end{figure}
+
+\subsection{Overall Satisfaction Percentage}
+The average satisfaction percentage across the dataset is 34.72\%, which suggests significant room for improvement in meeting patient expectations. This percentage reflects responses from patients based on a range of satisfaction metrics and highlights the need to prioritize areas with lower scores.
+
+\subsection{Key Metrics Driving Patient Satisfaction}
+The bar chart provides a breakdown of satisfaction responses based on HCAHPS (Hospital Consumer Assessment of Healthcare Providers and Systems) measures. Key highlights include:
+
+\subsubsection{Top-Performing Areas}
+\begin{itemize}
+    \item Patients felt staff provided adequate information, as indicated by higher satisfaction scores for responses like “Yes, staff ‘did’ give patients information” and “Nurses ‘always’ treated the patient respectfully.”
+    \item Measures related to nurses' and doctors' treatment consistently rank higher, showing that staff behavior and interaction are key strengths.
+\end{itemize}
+
+\subsubsection{Areas for Improvement}
+\begin{itemize}
+    \item Responses such as "Staff ‘always’ explained results clearly" and "Staff ‘always’ explained medications" received comparatively lower satisfaction percentages. This indicates a need for better communication around medical processes and medication explanations.
+    \item Lower scores in areas like “Room was ‘always’ clean” and “Staff ‘always’ kept things quiet at night” highlight operational and environmental challenges that need attention.
+\end{itemize}
+
+\subsection{Geographic Trends}
+The map highlights regions with varying levels of satisfaction, with the majority of responses concentrated in North America. Further analysis of geographic data could identify disparities in patient experiences by region or facility.
+
+\subsection{Insights}
+\begin{itemize}
+    \item \textbf{Strengths in Staff Interactions}: Higher satisfaction scores for nurse and doctor interactions reflect the value patients place on empathy and respect. This strength can serve as a foundation to further improve overall satisfaction.
+    \item \textbf{Focus on Communication and Clarity}: Patients value clear explanations about their care, including test results and medications. Addressing gaps in these areas could significantly improve satisfaction percentages.
+    \item \textbf{Environmental Factors Need Attention}: Metrics related to cleanliness and noise levels are lower, showing opportunities to enhance the patient experience by addressing operational challenges.
+    \item \textbf{Actionable Insights by Region}: Using the map, specific regions or facilities with lower satisfaction scores can be identified, enabling targeted efforts to address issues in those areas.
+\end{itemize}
+
+\section{Hospital Ownership, Ratings, and Emergency Services}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\linewidth]{photo/4.jpeg} % Ensure the image is in the correct folder or provide the full path
+    \caption{Hospital Ownership and Ratings Overview}
+    \label{fig:hospital_ownership_ratings}
+\end{figure}
+
+\subsection{Hospital Ownership}
+The majority of hospitals, approximately 72\%, are voluntary non-profits. This highlights a system largely focused on community-driven healthcare rather than profit-making. For-profit hospitals make up about 15\%, reflecting their role in filling gaps and expanding access. Government-operated hospitals, including local, state, and federal facilities, form a smaller portion and appear to focus on providing care to underserved populations or fulfilling specific public health needs.
+
+\subsection{Hospital Ratings}
+Most hospitals are rated at an average level (3), with 62.7\% of facilities falling into this category. While this suggests many hospitals meet basic standards, it leaves significant room for improvement. Higher ratings (4 and 5) account for just under a quarter of all hospitals, showcasing excellence in a smaller number of facilities. Hospitals with the lowest ratings (1 and 2) represent only a tiny fraction of the dataset, indicating that very few facilities fail to meet patient expectations outright.
+
+\subsection{Emergency Services}
+\begin{itemize}
+    \item \textbf{Acute Care Hospitals}: These facilities are the most relied upon for emergency services, handling the majority of urgent healthcare needs.
+    \item \textbf{Critical Access Hospitals}: These hospitals support emergency care in rural and less populated regions, ensuring accessibility in underserved areas.
+    \item \textbf{Specialized Facilities}: Psychiatric and Children’s Hospitals focus on particular patient needs and represent a much smaller share, reflecting their targeted roles within the healthcare system.
+\end{itemize}
+
+\subsection{Insights}
+\begin{itemize}
+    \item \textbf{Acute Care Hospitals as the Backbone}: Acute Care Hospitals play a crucial role in emergency services. Expanding the reach and capacity of rural and specialized facilities could address gaps in care.
+    \item \textbf{Room for Improvement in Hospital Ratings}: The prevalence of average ratings (3) suggests that while many hospitals meet basic expectations, there is significant potential for improvement to raise standards across the board.
+    \item \textbf{Opportunities for Analysis and Equity}: This comprehensive dataset of 5,398 hospitals offers valuable opportunities to analyze trends, enhance care quality, and ensure more equitable access to healthcare nationwide.
+\end{itemize}
+
+\section{Key Metrics and Performance Overview}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\linewidth]{photo/5.jpeg} % Ensure the image is in the correct folder or provide the full path
+    \caption{Key Metrics and Performance by Hospital Ownership and Type}
+    \label{fig:key_metrics_performance}
+\end{figure}
+
+\subsection{Key Metrics Overview}
+\begin{itemize}
+    \item \textbf{Mortality Group Measures (MORT)}: Total of 32K, representing performance in patient survival outcomes.
+    \item \textbf{Safety Group Measures}: Total of 37K, reflecting efforts to minimize adverse events during care.
+    \item \textbf{Readmission Group Measures (READM)}: Highest total of 51K, emphasizing the need for post-care quality improvements to reduce avoidable readmissions.
+\end{itemize}
+
+\subsection{Performance by Ownership}
+\begin{itemize}
+    \item \textbf{Voluntary Non-Profit Hospitals}: Lead with 23,078 contributions to the overall measure counts, showing their dominant role in patient care quality and performance.
+    \item \textbf{Proprietary Hospitals}: Account for 7,722, making them the second-largest contributors.
+    \item \textbf{Government-Operated Facilities}: Include hospital systems (5,555), local government facilities (4,235), and Veterans Health Administration (1,463), reflecting the contributions of public sector care.
+    \item \textbf{Physician-Owned Hospitals}: Contribute the least (770), emphasizing their limited role in these metrics.
+\end{itemize}
+
+\subsection{Performance by Hospital Type}
+\begin{itemize}
+    \item \textbf{Acute Care Hospitals}: Dominate all metrics, contributing 34,452 in readmission measures and significant numbers in mortality and safety. This aligns with their role as the primary providers of critical and emergency care.
+    \item \textbf{Critical Access Hospitals}: Contribute 14,806 in readmission measures, reflecting their key role in rural and underserved communities. However, their overall contributions to mortality and safety are lower, likely due to resource limitations.
+    \item \textbf{Veterans Health Administration}: Contributes 1,463 in readmission measures, showcasing a smaller but specialized role in patient care.
+\end{itemize}
+
+\subsection{Trends Across Metrics}
+\begin{itemize}
+    \item \textbf{Readmissions Dominate}: Readmission measures are the largest category across all hospital types, indicating ongoing challenges with care continuity and the need for post-discharge interventions.
+    \item \textbf{Safety and Mortality Lag}: While still significant, safety and mortality measures are slightly lower than readmissions, suggesting potential focus areas to improve patient outcomes during and immediately after care.
+\end{itemize}
+
+\subsection{Insights}
+\begin{itemize}
+    \item \textbf{Focus on Readmissions}: High readmission measures across all hospital types and ownerships suggest the need to strengthen discharge planning, patient education, and post-care support.
+    \item \textbf{Scaling Best Practices}: Voluntary non-profits are leading contributors, reflecting their quality focus. Scaling their best practices could elevate performance across other hospital categories.
+    \item \textbf{Resource Needs for Critical Access Hospitals}: Critical Access Hospitals play a vital role in rural areas but may require additional resources to improve mortality and safety outcomes.
+    \item \textbf{Targeted Improvements for Niche Facilities}: Veterans Health Administration and physician-owned facilities, while smaller contributors, represent niche opportunities for targeted quality improvements.
+\end{itemize}
+
+\section{Mortality, Safety, and Readmissions Analysis by Hospital Type}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\linewidth]{photo/6.jpeg} % Ensure the image is in the correct folder or provide the full path
+    \caption{Analysis of Mortality, Safety, and Readmissions by Hospital Type}
+    \label{fig:metrics_by_hospital_type}
+\end{figure}
+
+\subsection{Overview of Contributions}
+The data highlights voluntary non-profit private hospitals as the most significant contributors to healthcare services in terms of patient satisfaction metrics, including mortality, safety, and readmission rates. These hospitals dominate across all performance indicators, showcasing their central role in delivering high-quality care. Proprietary hospitals and government-run facilities play smaller yet critical roles, with notable contributions to safety and readmissions metrics. However, their representation is comparatively lower than voluntary non-profit institutions.
+
+\subsection{Mortality Performance}
+\begin{itemize}
+    \item The majority of mortality measures are categorized as "No Different," meaning most hospitals perform at an expected level in terms of mortality rates.
+    \item Voluntary non-profit hospitals lead in this metric, emphasizing their role in providing dependable care.
+    \item Proprietary and government-owned facilities contribute modestly, suggesting opportunities for further improvement.
+\end{itemize}
+
+\subsection{Safety Metrics}
+\begin{itemize}
+    \item Voluntary non-profit hospitals dominate in safety measures, indicating stronger protocols and systems to ensure patient safety.
+    \item Proprietary and government hospitals show a smaller share in this metric, pointing to areas for enhancement in safety outcomes.
+\end{itemize}
+
+\subsection{Readmissions Metrics}
+\begin{itemize}
+    \item Most hospitals fall under the "No Different" category for readmission rates, meaning they perform at par with national benchmarks.
+    \item Voluntary non-profit hospitals demonstrate higher consistency in maintaining acceptable readmission levels.
+\end{itemize}
+
+\subsection{Insights}
+\begin{itemize}
+    \item \textbf{Excellence of Voluntary Non-Profits}: Voluntary non-profit private hospitals are the backbone of quality healthcare delivery, excelling in all three key performance areas—mortality, safety, and readmissions.
+    \item \textbf{Opportunities for Improvement}: The prevalence of the "No Different" category across all metrics indicates that most hospitals meet expected benchmarks. However, targeted interventions could shift more facilities into the "Better" category.
+    \item \textbf{Enhancing Proprietary and Government Hospitals}: While proprietary and government hospitals contribute meaningfully, they have room to improve safety and readmission rates to align with the performance of voluntary non-profits.
+\end{itemize}
+
+
+
+\section{Mortality, Safety, and Readmissions Analysis by Hospital Type}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\linewidth]{photo/6.jpeg} % Ensure the image is in the correct folder or provide the full path
+    \caption{Analysis of Mortality, Safety, and Readmissions by Hospital Type}
+    \label{fig:metrics_by_hospital_type}
+\end{figure}
+
+\subsection{Overview of Contributions}
+The data highlights voluntary non-profit private hospitals as the most significant contributors to healthcare services in terms of patient satisfaction metrics, including mortality, safety, and readmission rates. These hospitals dominate across all performance indicators, showcasing their central role in delivering high-quality care. Proprietary hospitals and government-run facilities play smaller yet critical roles, with notable contributions to safety and readmissions metrics. However, their representation is comparatively lower than voluntary non-profit institutions.
+
+\subsection{Mortality Performance}
+\begin{itemize}
+    \item The majority of mortality measures are categorized as "No Different," meaning most hospitals perform at an expected level in terms of mortality rates.
+    \item Voluntary non-profit hospitals lead in this metric, emphasizing their role in providing dependable care.
+    \item Proprietary and government-owned facilities contribute modestly, suggesting opportunities for further improvement.
+\end{itemize}
+
+\subsection{Safety Metrics}
+\begin{itemize}
+    \item Voluntary non-profit hospitals dominate in safety measures, indicating stronger protocols and systems to ensure patient safety.
+    \item Proprietary and government hospitals show a smaller share in this metric, pointing to areas for enhancement in safety outcomes.
+\end{itemize}
+
+\subsection{Readmissions Metrics}
+\begin{itemize}
+    \item Most hospitals fall under the "No Different" category for readmission rates, meaning they perform at par with national benchmarks.
+    \item Voluntary non-profit hospitals demonstrate higher consistency in maintaining acceptable readmission levels.
+\end{itemize}
+
+\subsection{Insights}
+\begin{itemize}
+    \item \textbf{Excellence of Voluntary Non-Profits}: Voluntary non-profit private hospitals are the backbone of quality healthcare delivery, excelling in all three key performance areas—mortality, safety, and readmissions.
+    \item \textbf{Opportunities for Improvement}: The prevalence of the "No Different" category across all metrics indicates that most hospitals meet expected benchmarks. However, targeted interventions could shift more facilities into the "Better" category.
+    \item \textbf{Enhancing Proprietary and Government Hospitals}: While proprietary and government hospitals contribute meaningfully, they have room to improve safety and readmission rates to align with the performance of voluntary non-profits.
+\end{itemize}
+
+
+\section{Impacts}
+
+The implementation of this project represents a significant advancement in how healthcare systems evaluate and improve patient satisfaction. By combining advanced data analysis, innovative visualization tools, and demographic insights, the project establishes a foundation for higher-quality care, increased transparency, and more inclusive healthcare delivery. Its impacts extend across multiple dimensions:
+
+\subsection{Raising the Standard of Healthcare Services}
+By identifying and addressing specific areas of improvement, such as communication and provider attentiveness, the project ensures that healthcare providers can offer services that align more closely with patient expectations. This targeted approach enhances care delivery and contributes to better patient outcomes.
+
+\subsection{Empowering Patient Choices}
+Patients gain access to clear and actionable information about healthcare provider performance. This transparency enables them to make informed decisions about where to seek care, fostering greater trust in the system and encouraging providers to maintain high service standards.
+
+\subsection{Promoting Transparency and Accountability}
+The dynamic benchmarking feature of the project compels healthcare organizations to evaluate their performance relative to peers. This comparison motivates providers to improve while introducing a competitive element that drives innovation and adherence to best practices.
+
+\subsection{Enabling Personalized Care}
+The incorporation of demographic-specific insights allows providers to recognize and address the unique preferences and needs of different patient groups. For instance, care tailored to the expectations of specific age groups or genders ensures that services remain relevant and effective, fostering inclusivity.
+
+\subsection{Facilitating Proactive Issue Resolution}
+Through real-time feedback mechanisms, healthcare organizations can address patient concerns promptly, often before they escalate. This proactive approach enhances trust and satisfaction by demonstrating a commitment to addressing patient needs in a timely manner.
+
+\subsection{Optimizing Resource Utilization}
+The project’s data visualization tools assist administrators in prioritizing resource allocation and planning improvement initiatives. By identifying high-impact areas for change, organizations can allocate budgets and staff more effectively, achieving better results with fewer wasted resources.
+
+\subsection{Establishing a System of Continuous Quality Improvement}
+The integration of real-time feedback and performance monitoring creates a framework for ongoing improvement. Providers are equipped with tools to adapt to shifting patient needs, ensuring that care remains responsive and effective over time.
+
+\subsection{Adapting to Diverse Healthcare Settings}
+The scalability and flexibility of the project make it suitable for implementation in a variety of healthcare environments, from small clinics to large hospital networks. This adaptability ensures that the project’s benefits can be realized across diverse organizational contexts.
+
+\subsection{Enhancing the Patient-Provider Relationship}
+As patients experience a more responsive and transparent system, trust in healthcare providers increases. This strengthened relationship leads to higher satisfaction, better communication, and improved cooperation in managing health outcomes.
+
+\subsection{Encouraging Industry-Wide Improvements}
+By setting a benchmark for quality and transparency, the project influences the broader healthcare industry. Other organizations can adopt the framework and tools developed here, creating a ripple effect of innovation and improvement.
+
+
+\section{Conclusion}
+
+This project epitomizes how data-driven insights can help improve patient satisfaction and the quality of healthcare. Using the CAHPS survey data, we developed a robust framework to assess patient experiences, identify drivers of satisfaction, and pinpoint priority areas for improvement.
+
+This framework enabled transparent comparisons of provider performance through interactive dashboards and benchmarking tools, encouraging accountability and continuous improvement. The integration of mechanisms for real-time feedback ensures that healthcare providers can respond promptly to patient concerns, making the system dynamic and patient-centered.
+
+The ultimate result is the creation of a foundation from which healthcare providers can deliver improved services, patients gain informed decision-making tools, and a culture of continuous quality improvement is promoted. This reaffirms that the systematic use of patient feedback is crucial in narrowing the gap between what patients expect and what they receive, thus restoring trust and ultimately improving outcomes within the healthcare system.
+
+
+
+\section{Future Recommendations}
+
+\subsection{Incorporate Diverse Data Sources}
+Including additional datasets, such as provider reviews, hospital operational metrics, and detailed demographic information, can provide a more comprehensive picture of patient experiences. These data points can reveal critical relationships between operational efficiency and patient satisfaction, offering a holistic understanding of healthcare quality.
+
+\subsection{Build Advanced Predictive Models}
+Leveraging machine learning techniques can help predict satisfaction trends and anticipate patient needs. Predictive modeling can identify patterns in historical data, enabling healthcare providers to take proactive measures, such as optimizing resource allocation or addressing emerging concerns before they escalate.
+
+\subsection{Develop Real-Time Dashboards}
+Automated dashboards with real-time updates can empower healthcare administrators to monitor satisfaction levels and respond to feedback instantly. These dashboards would reduce manual efforts in data tracking while providing actionable insights that support swift decision-making and continuous performance improvement.
+
+\subsection{Use Natural Language Processing (NLP)}
+By incorporating NLP techniques, the system could analyze unstructured data from open-ended survey responses or online reviews. This would help uncover hidden trends, identify recurring issues, and interpret patient sentiment, offering deeper insights into areas needing improvement.
+
+\subsection{Collaborate with Healthcare Providers}
+Partnering with healthcare organizations would enable the practical implementation of the system. These collaborations could facilitate pilot programs to test the framework, gather real-world feedback, and refine its tools to better align with healthcare workflows. Such partnerships ensure that the system is not only theoretically robust but also operationally effective.
+
+\subsection{Broaden Use Cases}
+The system can be adapted to other aspects of healthcare management, such as tracking staff satisfaction or evaluating operational performance. By broadening its functionality, the project can become a versatile tool for improving both patient and organizational outcomes.
+
+
+\begin{thebibliography}{1}
+
+\bibitem{quigley2024}
+D.~D. Quigley, M.~N. Elliott, N. Qureshi, Z. Predmore, and R.~D. Hays, 
+``How the CAHPS Clinician and Group Patient Experience Survey Data Have Been Used in Research: A Systematic Review,'' 
+\textit{J Patient Cent Res Rev}, vol. 11, no. 2, pp. 88--96, Jul. 2024, doi: 10.17294/2330-0698.2056. PMID: 39044849; PMCID: PMC11262838.\\
+
+\bibitem{dyer2012}
+N. Dyer, J.~S. Sorra, S.~A. Smith, P.~D. Cleary, and R.~D. Hays,
+``Psychometric properties of the Consumer Assessment of Healthcare Providers and Systems (CAHPS\textsuperscript{\textregistered}) Clinician and Group Adult Visit Survey,'' 
+\textit{Med Care}, vol. 50, Suppl(Suppl), pp. S28--34, Nov. 2012, doi: 10.1097/MLR.0b013e31826cbc0d. PMID: 23064274; PMCID: PMC3480671.\\
+
+\bibitem{setodji2019}
+C.~M. Setodji, Q. Burkhart, R.~D. Hays, D.~D. Quigley, S.~A. Skootsky, and M.~N. Elliott,
+``Differences in Consumer Assessment of Healthcare Providers and Systems Clinician and Group Survey Scores by Recency of the Last Visit: Implications for Comparability of Periodic and Continuous Sampling,'' 
+\textit{Med Care}, vol. 57, no. 12, pp. e80--e86, Dec. 2019, doi: 10.1097/MLR.0000000000001134. PMID: 31107400; PMCID: PMC6856388.\\
+
+\bibitem{deleon2012}
+S.~F. De Leon, S.~L. Silfen, J.~J. Wang, et al., 
+``Patient experiences at primary care practices using electronic health records,'' 
+\textit{J Med Pract Manage}, vol. 28, pp. 169--176, 2012. Available: 
+\url{https://www.proquest.com/docview/1349958127?pq-origsite=gscholar\&fromopenview=true}.
+\end{thebibliography}
+
+
+
+
+
+\end{document}
+
+
